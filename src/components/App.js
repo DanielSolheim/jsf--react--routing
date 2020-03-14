@@ -5,24 +5,35 @@ import Container from "react-bootstrap/Container";
 import Home from "./Home.js";
 import AboutUs from "./AboutUs.js";
 
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    NavLink,
+} from "react-router-dom";
+
 export default function App() {
     return (
+      <Router>
         <div class="App">
             <Navbar bg="dark" variant="dark" expand="lg">
                 <Navbar.Brand href="/">Website Name</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link href="/">Home</Nav.Link>
-                        <Nav.Link href="/aboutus">About</Nav.Link>
+                        <NavLink to="/" exact className="nav-link">Home</NavLink>
+                        <NavLink to="/aboutus" className="nav-link">About</NavLink>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
 
             <Container>
-                <Home />
-                <AboutUs />
+               <Switch>
+                <Route path="/" exact component={Home}/>
+                <Route path="/aboutus" component={AboutUs} />
+              </Switch>
             </Container>
         </div>
+      </Router>
     );
 }
